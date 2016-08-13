@@ -14,7 +14,7 @@ keywords = ["lunch", "food"]
 
 AUTH_KEY = os.environ['AUTH_KEY']
 ROOM_ID = os.environ['ROOM_ID']
-GOOGLE_SVC_ENDPOINT = os.environ['GOOGLE_SVC_ENDPOINT']
+GOOGLE_SVC_ENDPOINT = os.environ['HOST_SPARKBOT_GOOGLE'] + "/getnearby"
 
 # Get the messages from the room
 def get_room_messages():
@@ -38,14 +38,8 @@ def parse_room_messages(messages):
         if (msg_dict['text'].lower() in keywords) & (msg_dict['id'] not in parsed_kw_messages):
             print "Keyword '" +  msg_dict['text'] + "' found in message " + msg_dict['id']
             parsed_kw_messages.append(msg_dict['id'])
-            r = requests.get(GOOGLE_SVC_ENDPOINT)
-            rand = random.randint(0, 1000)
-            p = {
-                "id": rand,
-                "message": r.text
-                }
-            d = requests.post('http://dev--spark-chatbot--spark-chatbot-flask--6feffc.gce.shipped-cisco.com/setwatcherstatus', params=p)
-
+            r = requests.get(HOST_SPARKBOT_GOOGLE)
+            
 if __name__ == "__main__":
     while (True):
         messages = get_room_messages()

@@ -14,7 +14,7 @@ keywords = ["lunch", "food"]
 
 AUTH_KEY = os.environ['AUTH_KEY']
 ROOM_ID = os.environ['ROOM_ID']
-GOOGLE_SVC_ENDPOINT = os.environ['HOST_SPARKBOT_GOOGLE'] + "/getnearby"
+HOST_SPARKBOT_GOOGLE = os.environ['HOST_SPARKBOT_GOOGLE'] + "/getnearby"
 
 # Get the messages from the room
 def get_room_messages():

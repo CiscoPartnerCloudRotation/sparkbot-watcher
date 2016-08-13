@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python app.py
-
+python -m SimpleHTTPServer.py &
+python spark_watcher.py

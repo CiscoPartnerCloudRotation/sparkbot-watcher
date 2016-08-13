@@ -14,11 +14,11 @@ keywords = ["lunch", "food"]
 
 AUTH_KEY = os.environ['AUTH_KEY']
 ROOM_ID = os.environ['ROOM_ID']
-HOST_SPARKBOT_GOOGLE = os.environ['HOST_SPARKBOT_GOOGLE'] + "/getnearby"
+sparkbot_gmaps_svc_endpoint = os.environ['HOST_SPARKBOT_GOOGLE'] + "/getnearby"
 
 # Get the messages from the room
 def get_room_messages():
-    endpoint = "https://api.ciscospark.com/v1/messages"
+    sparkroom_endpoint = "https://api.ciscospark.com/v1/messages"
     header = {
         'Content-type' : 'application/json; charset=utf-8',
         'Authorization': AUTH_KEY
@@ -27,7 +27,7 @@ def get_room_messages():
         'roomId': ROOM_ID,
         'max' : 1
     }
-    r = requests.get(url=endpoint, headers=header, params=param)
+    r = requests.get(url=sparkroom_endpoint, headers=header, params=param)
     return json.loads(r.text)
 
 def parse_room_messages(messages):
@@ -38,7 +38,7 @@ def parse_room_messages(messages):
         if (msg_dict['text'].lower() in keywords) & (msg_dict['id'] not in parsed_kw_messages):
             print "Keyword '" +  msg_dict['text'] + "' found in message " + msg_dict['id']
             parsed_kw_messages.append(msg_dict['id'])
-            r = requests.get(HOST_SPARKBOT_GOOGLE)
+            r = requests.get(sparkbot_gmaps_svc_endpoint)
             
 if __name__ == "__main__":
     while (True):

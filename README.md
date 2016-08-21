@@ -16,4 +16,4 @@ This project is one of three components making up the Cisco Shipped/Sparkbot dem
 1. sparkbot-watcher polls for room messages every two seconds, and then parses them looking for keywords.
 2. If it spots a keyword _in a message that it has not yet seen_, it adds that message to parsed_kw_messages[] and then makes a call to sparkbot-google to get a result.
 3. Upon receiving a request, sparkbot-google finds contextually relevant location data. For demo purposes, a location is hardcoded.
-4. sparkbot-google 
+4. sparkbot-google sends the resulting data to sparkbot-flask, which posts the message to the spark room.
